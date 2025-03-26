@@ -16,28 +16,12 @@ const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 
 app.use(express.json())
 // app.use(cors())
-const corsOptions = {
-    origin: "*", // Allow your frontend only
+app.use(cors({
+    origin: "https://pass-op-phi.vercel.app", // Allow your frontend domain
+    credentials: true, // Allow cookies/tokens
     methods: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-    allowedHeaders: [
-        "X-CSRF-Token",
-        "X-Requested-With",
-        "Accept",
-        "Accept-Version",
-        "Content-Length",
-        "Content-MD5",
-        "Content-Type",
-        "Date",
-        "X-Api-Version",
-    ],
-    credentials: true, // Allow cookies, tokens, etc.
-};
-
-// Apply CORS middleware
-app.use(cors(corsOptions));
-
-// Handle Preflight Requests (OPTIONS)
-app.options("*", cors(corsOptions));
+    allowedHeaders: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+}));
 
 // app.use(cors({ origin: true, credentials: true })); // Allow only your frontend
 // app.use(cors({ origin: "https://pass-op-phi.vercel.app" })); // Allow only your frontend
