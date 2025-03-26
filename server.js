@@ -15,17 +15,15 @@ const port = process.env.PORT || 3000;
 const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 
 app.use(express.json())
-app.use(cors({
-    origin: 'https://pass-op-phi.vercel.app',  // ✅ Allow only your frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
-app.options('*', cors());  // ✅ Explicitly handle preflight requests
-app.use(express.json());
+app.use(cors())
 app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://pass-op-phi.vercel.app');
+    next()
+})
 
 app.get('/api/get-passwords', requireAuth(), async (req, res) => {
     const { userId } = getAuth(req)
