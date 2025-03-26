@@ -17,7 +17,7 @@ const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 app.use(express.json())
 // app.use(cors())
 const corsOptions = {
-    origin: "https://pass-op-phi.vercel.app", // Allow your frontend only
+    origin: "*", // Allow your frontend only
     methods: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
     allowedHeaders: [
         "X-CSRF-Token",
