@@ -9,6 +9,7 @@ import Theme from './models/Theme.js';
 import { clerkMiddleware } from '@clerk/express'
 import { requireAuth, getAuth } from '@clerk/express'
 
+
 const app = express()
 const port = 3000
 
