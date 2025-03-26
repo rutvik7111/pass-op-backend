@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(cors())
 app.use(clerkMiddleware())
 
-mongoose.connect("mongodb://localhost:27017/Password")
+await mongoose.connect(process.env.MONGODB_URI)
 
 app.get('/api/get-passwords', requireAuth(), async (req, res) => {
     const { userId } = getAuth(req)
