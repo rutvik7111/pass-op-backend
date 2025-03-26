@@ -16,6 +16,7 @@ const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 
 app.use(express.json())
 app.use(cors())
+app.use(cors({ origin: "https://pass-op-phi.vercel.app" })); // Allow only your frontend
 app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
