@@ -105,6 +105,6 @@ app.post('/api/set-theme', requireAuth(), async (req, res) => {
     res.send("Theme saved.")
 })
 
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
