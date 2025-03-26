@@ -15,8 +15,9 @@ const port = process.env.PORT || 3000;
 const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 
 app.use(express.json())
-app.use(cors())
-app.use(cors({ origin: "https://pass-op-phi.vercel.app" })); // Allow only your frontend
+// app.use(cors())
+app.use(cors({ origin: true, credentials: true })); // Allow only your frontend
+// app.use(cors({ origin: "https://pass-op-phi.vercel.app" })); // Allow only your frontend
 app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
@@ -45,7 +46,7 @@ app.get('/api/get-passwords', requireAuth(), async (req, res) => {
         return { ...pswd.toObject(), password: decrypted }
     })
     console.log(passwords);
-    
+
     res.json(passwords)
 })
 
