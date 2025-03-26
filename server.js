@@ -43,7 +43,8 @@ app.get('/api/get-passwords', requireAuth(), async (req, res) => {
         decrypted += decipher.final('utf8');
         return { ...pswd.toObject(), password: decrypted }
     })
-
+    console.log(passwords);
+    
     res.json(passwords)
 })
 
