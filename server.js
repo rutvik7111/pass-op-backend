@@ -22,6 +22,7 @@ app.use(cors({
     methods: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
     allowedHeaders: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
 }));
+app.options("*", cors()); // Handle preflight requests
 
 // app.use(cors({ origin: true, credentials: true })); // Allow only your frontend
 // app.use(cors({ origin: "https://pass-op-phi.vercel.app" })); // Allow only your frontend
