@@ -21,6 +21,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
+app.options('*', cors());  // ✅ Explicitly handle preflight requests
+app.use(express.json());
 app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
