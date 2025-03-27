@@ -16,32 +16,9 @@ const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 
 app.use(express.json())
 app.use(cors())
-// app.use(cors({
-//     origin: "https://pass-op-phi.vercel.app", // Allow your frontend domain
-//     credentials: true, // Allow cookies/tokens
-//     methods: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-//     allowedHeaders: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-// }));
-// app.options("*", cors()); // Handle preflight requests
-
-// app.use(cors({ origin: true, credentials: true })); // Allow only your frontend
-// app.use(cors({ origin: "https://pass-op-phi.vercel.app" })); // Allow only your frontend
 app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://pass-op-phi.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true'); // If using authentication
-
-    // if (req.method === "OPTIONS") {
-    //     return res.sendStatus(200); // Handle preflight requests
-    // }
-
-    next();
-})
 
 app.get('/api/get-passwords', requireAuth(), async (req, res) => {
     const { userId } = getAuth(req)
