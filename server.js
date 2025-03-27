@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 
 app.use(express.json())
-app.use(cors())
+// app.use(cors())
 app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
