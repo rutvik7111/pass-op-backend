@@ -20,6 +20,10 @@ app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
 
+app.get("/check-cors", (req, res) => {
+    res.send("CORS is installed!");
+});
+
 app.get('/api/get-passwords', requireAuth(), async (req, res) => {
     const { userId } = getAuth(req)
     let passwords = await Password.find({ userId: userId })
