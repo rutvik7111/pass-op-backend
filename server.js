@@ -10,12 +10,12 @@ import { clerkMiddleware } from '@clerk/express'
 import { requireAuth, getAuth } from '@clerk/express'
 
 const app = express()
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const secretKey = process.env.SECRET_KEY;  // Loaded from .env
 
 app.use(express.json())
-// app.use(cors())
+app.use(cors())
 app.use(clerkMiddleware())
 
 await mongoose.connect(process.env.MONGODB_URI)
